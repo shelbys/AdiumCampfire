@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1186F5175D6A1F00C67A59 /* MSCampfireEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809F21159070F0085372B /* MSCampfireEngine.m */; };
 		8C0809DE115905FC0085372B /* MSAdiumCampfirePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809D9115905FC0085372B /* MSAdiumCampfirePlugin.m */; };
 		8C0809DF115905FC0085372B /* MSCampfireAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809DB115905FC0085372B /* MSCampfireAccount.m */; };
 		8C0809E0115905FC0085372B /* MSCampfireService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809DD115905FC0085372B /* MSCampfireService.m */; };
 		8C0809F71159070F0085372B /* DDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809EF1159070F0085372B /* DDAsyncSocket.m */; };
-		8C0809F91159070F0085372B /* MSCampfireEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809F21159070F0085372B /* MSCampfireEngine.m */; };
 		8C0809FA1159070F0085372B /* MSHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809F41159070F0085372B /* MSHTTPConnection.m */; };
 		8C0809FB1159070F0085372B /* NSNumber+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809F61159070F0085372B /* NSNumber+Conversion.m */; };
 		8C080A091159071D0085372B /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0809FE1159071D0085372B /* NSObject+SBJSON.m */; };
@@ -290,6 +290,9 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "AdiumCampfire" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -361,7 +364,6 @@
 				8C0809DF115905FC0085372B /* MSCampfireAccount.m in Sources */,
 				8C0809E0115905FC0085372B /* MSCampfireService.m in Sources */,
 				8C0809F71159070F0085372B /* DDAsyncSocket.m in Sources */,
-				8C0809F91159070F0085372B /* MSCampfireEngine.m in Sources */,
 				8C0809FA1159070F0085372B /* MSHTTPConnection.m in Sources */,
 				8C0809FB1159070F0085372B /* NSNumber+Conversion.m in Sources */,
 				8C080A091159071D0085372B /* NSObject+SBJSON.m in Sources */,
@@ -374,6 +376,7 @@
 				8CD7DF6611624AB4006A6216 /* MSCampfireRoom.m in Sources */,
 				8C74D86F117DE75900701FA7 /* NSString+UUID.m in Sources */,
 				8C74D872117DE7E100701FA7 /* NSData+Base64.m in Sources */,
+				3A1186F5175D6A1F00C67A59 /* MSCampfireEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,16 +406,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Debug";
+				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Release-Debug";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AdiumCampfire_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "$(ADIUM)/Source";
+				HEADER_SEARCH_PATHS = "$(ADIUM)/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "\"$(HOME)/Library/Application Support/Adium 2.0/PlugIns/\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
@@ -429,13 +432,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Debug";
+				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Release-Debug";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AdiumCampfire_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "$(ADIUM)/Source";
+				HEADER_SEARCH_PATHS = "$(ADIUM)/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "\"$(HOME)/Library/Application Support/Adium 2.0/PlugIns/\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
@@ -451,23 +455,23 @@
 		1DEB913F08733D840010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ADIUM = "$(HOME)/Projekty/Adium";
+				ADIUM = /Project/Adium;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Debug";
+				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Release-Debug/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(ADIUM)/Source";
+				HEADER_SEARCH_PATHS = "$(ADIUM)/Source/**";
 				INSTALL_PATH = "\"$(HOME)/Library/Application Support/Adium 2.0/PlugIns/\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
 				);
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = AdiumPlugin;
 			};
 			name = Debug;
@@ -475,21 +479,21 @@
 		1DEB914008733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ADIUM = "$(HOME)/Projekty/Adium";
+				ADIUM = /Project/Adium;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Release";
+				FRAMEWORK_SEARCH_PATHS = "$(ADIUM)/build/Release-Debug/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(ADIUM)/Source";
+				HEADER_SEARCH_PATHS = "$(ADIUM)/Source/**";
 				INSTALL_PATH = "\"$(HOME)/Library/Application Support/Adium 2.0/PlugIns/\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
 				);
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = AdiumPlugin;
 			};
 			name = Release;
@@ -498,10 +502,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -516,7 +520,6 @@
 					"-framework",
 					SenTestingKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = AdiumCampfireTest;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -526,10 +529,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -543,7 +546,6 @@
 					"-framework",
 					SenTestingKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = AdiumCampfireTest;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
