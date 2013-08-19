@@ -127,7 +127,10 @@
  */
 - (AIChat *)chatWithName:(NSString *)name
 {
-	AIChat *chat = [adium.chatController existingChatWithName:name onAccount:self];
+  AIChat *chat = [adium.chatController existingChatWithIdentifier:name onAccount:self];
+  if (!chat) {
+    chat = [adium.chatController existingChatWithName:name onAccount:self];
+  }
   if (!chat) {
       chat = [adium.chatController chatWithName:name
                                      identifier:name
@@ -161,7 +164,12 @@
   AILogWithSignature(@"Setting topic for chat %@", campfireChat);
   [campfireChat setTopic:@"Ala ma kota!"];
 
-  MSCampfireRoom *room = [_rooms objectForKey:[campfireChat name]];
+  NSString *roomId = [campfireChat identifier];
+  if(!roomId) {
+    roomId = [campfireChat name];
+  }
+  MSCampfireRoom *room = [_rooms objectForKey:roomId];
+  [campfireChat removeAllParticipatingContactsSilently];
   for (NSNumber *uid in [room contactUIDs]) {
     [campfireChat addParticipatingListObject:[self contactWithUID:[uid stringValue]] notify:NotifyNow];
   }
@@ -253,10 +261,17 @@
                                                    onAccount:self
                                             chatCreationInfo:nil];
     
-    [newRoomChat setDisplayName:[room objectForKey:@"name"]];
+    NSString *roomName = [room objectForKey:@"name"];
+    [newRoomChat setDisplayName:roomName];
       
     roomBookmark = [adium.contactController bookmarkForChat:newRoomChat inGroup:[adium.contactController groupWithUID:@"Campfire"]];
     
+    AIListContact *listObject = (AIListContact *)roomBookmark;
+    listObject.displayName = roomName;
+    [listObject setServersideAlias:roomName silently:FALSE];
+
+    [self updateCampfireChat:newRoomChat];
+
     if(!roomBookmark) {
 			AILog(@"Room bookmark is nil! Tried checking for existing bookmark for chat name %@, and creating a bookmark for chat %@ in group %@", [roomId stringValue], newRoomChat, [adium.contactController groupWithUID:@"Campfire"]);
 		}
@@ -304,7 +319,7 @@
     }
   } else if ([messageType isEqualTo:@"EnterMessage"]) {
     NSNumber *contactId = [message objectForKey:@"user_id"];
-    [[_rooms objectForKey:roomId] addContactWithUID:[contactId integerValue]];
+    [[_rooms objectForKey:[roomId stringValue]] addContactWithUID:[contactId integerValue]];
     [chat addParticipatingListObject:[self contactWithUID:[contactId stringValue]] notify:NotifyNow];
   } else if ([messageType isEqualTo:@"UploadMessage"]) {
     // If this is an upload message, ask the engine to get the upload details
