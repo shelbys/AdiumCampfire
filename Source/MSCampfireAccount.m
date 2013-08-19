@@ -130,7 +130,7 @@
 	AIChat *chat = [adium.chatController existingChatWithName:name onAccount:self];
   if (!chat) {
       chat = [adium.chatController chatWithName:name
-                                     identifier:nil
+                                     identifier:name
                                       onAccount:self
                                chatCreationInfo:nil];
   }
@@ -249,7 +249,7 @@
     }
     
     AIChat *newRoomChat = [adium.chatController chatWithName:[roomId stringValue]
-                                                  identifier:nil
+                                                  identifier:[roomId stringValue]
                                                    onAccount:self
                                             chatCreationInfo:nil];
     
