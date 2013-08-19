@@ -258,7 +258,7 @@
     roomBookmark = [adium.contactController bookmarkForChat:newRoomChat inGroup:[adium.contactController groupWithUID:@"Campfire"]];
     
     if(!roomBookmark) {
-			AILog(@"%@ Room bookmark is nil! Tried checking for existing bookmark for chat name %@, and creating a bookmark for chat %@ in group %@", [roomId stringValue], newRoomChat, [adium.contactController groupWithUID:@"Campfire"]);
+			AILog(@"Room bookmark is nil! Tried checking for existing bookmark for chat name %@, and creating a bookmark for chat %@ in group %@", [roomId stringValue], newRoomChat, [adium.contactController groupWithUID:@"Campfire"]);
 		}
   }
   [engine joinRoom:[roomId integerValue]];
@@ -266,7 +266,7 @@
   updatedRoomsCount += 1;
   if (!lastRoomsUpdate) {
     [self setConnectionProgress:[NSNumber numberWithDouble:(0.3 + (updatedRoomsCount / [_rooms count]) * 0.7)]
-                        message:[NSString stringWithFormat:@"Getting info for room %d/%d", updatedRoomsCount, [_rooms count]]];
+                        message:[NSString stringWithFormat:@"Getting info for room %ld/%ld", (long)updatedRoomsCount, [_rooms count]]];
     if (updatedRoomsCount >= [_rooms count]) {
       lastRoomsUpdate = [[NSDate alloc] init];
       [self didConnect];
@@ -291,7 +291,7 @@
   NSString *messageType = [message objectForKey:@"type"];
   if ([messageType isEqualTo:@"TextMessage"] || [messageType isEqualTo:@"PasteMessage"]) {
     NSNumber *contactId = [message objectForKey:@"user_id"];
-    AILogWithSignature(@"My ID=%d, Sender ID=%@", authenticatedUserId, contactId);
+    AILogWithSignature(@"My ID=%ld, Sender ID=%@", (long)authenticatedUserId, contactId);
     if( authenticatedUserId != [contactId integerValue] ) {
       AIContentMessage *contentMessage = [AIContentMessage messageInChat:chat
                                                               withSource:[self contactWithUID:[contactId stringValue]]
@@ -320,7 +320,7 @@
 {
   NSString *authenticatedUserIdAsString = [[user objectForKey:@"user"] objectForKey:@"id"];
   authenticatedUserId = [authenticatedUserIdAsString integerValue];
-  AILogWithSignature(@"Authenticated User ID = %d", authenticatedUserId);
+  AILogWithSignature(@"Authenticated User ID = %ld", (long)authenticatedUserId);
 }
 
 - (void)didReceiveUpload:(NSDictionary *)upload

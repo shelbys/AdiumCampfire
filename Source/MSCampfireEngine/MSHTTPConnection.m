@@ -36,7 +36,7 @@
 
 - (MSHTTPConnection *)initWithURL:(NSURL *)aURL
                            method:(NSString*)aMethod
-                         delegate:(NSObject *)aDelegate
+                         delegate:(NSObject <MSHTTPConnectionDelegate> *)aDelegate
 {  
   secure = NO;
   if ([[aURL scheme] isEqualTo:@"https"]) {
@@ -139,8 +139,8 @@
   if (payload) {
     headers = [headers stringByAppendingString:[NSString stringWithFormat:@""
       "Content-Type: application/json\r\n"
-      "Content-Length: %d\r\n",
-      [payload length]]];
+      "Content-Length: %ld\r\n",
+      (unsigned long)[payload length]]];
   }
   headers = [headers stringByAppendingString:@"\r\n"];
   

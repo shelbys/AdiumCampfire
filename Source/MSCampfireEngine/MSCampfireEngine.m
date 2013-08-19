@@ -69,13 +69,13 @@
 
 - (void)getRoomInformationFor:(NSInteger)roomId
 {
-  NSString *path = [NSString stringWithFormat:@"/room/%d.json", roomId];
+  NSString *path = [NSString stringWithFormat:@"/room/%ld.json", (long)roomId];
   [self startRequestWithMethod:@"GET" path:path streaming:NO key:path userInfo:ROOM_INFORMATION];
 }
 
 - (void)getInformationForUser:(NSInteger)userId
 {
-  NSString *path = [NSString stringWithFormat:@"/users/%d.json", userId];
+  NSString *path = [NSString stringWithFormat:@"/users/%ld.json", (long)userId];
   [self startRequestWithMethod:@"GET" path:path streaming:NO key:path userInfo:USER_INFORMATION];
 }
 
@@ -87,13 +87,13 @@
 
 - (void)getUploadForId:(NSInteger)uploadId inRoom:(NSInteger)roomId
 {
-  NSString *path = [NSString stringWithFormat:@"/room/%d/messages/%d/upload.json", roomId, uploadId];
+  NSString *path = [NSString stringWithFormat:@"/room/%ld/messages/%ld/upload.json", (long)roomId, (long)uploadId];
   [self startRequestWithMethod:@"GET" path:path streaming:NO key:path userInfo:UPLOAD_INFORMATION];
 }
 
 - (void)joinRoom:(NSInteger)roomId
 {
-  NSString *path = [NSString stringWithFormat:@"/room/%d/join.xml", roomId];
+  NSString *path = [NSString stringWithFormat:@"/room/%ld/join.xml", (long)roomId];
   NSMutableDictionary *identifier = [[NSMutableDictionary alloc] initWithCapacity:2];
   [identifier setObject:[NSNumber numberWithInteger:roomId] forKey:@"roomId"];
   [identifier setObject:JOIN forKey:@"operation"];
@@ -102,7 +102,7 @@
 
 - (void)leaveRoom:(NSInteger)roomId
 {
-  NSString *path = [NSString stringWithFormat:@"/room/%d/leave.xml", roomId];
+  NSString *path = [NSString stringWithFormat:@"/room/%ld/leave.xml", (long)roomId];
   NSMutableDictionary *identifier = [[NSMutableDictionary alloc] initWithCapacity:2];
   [identifier setObject:[NSNumber numberWithInteger:roomId] forKey:@"roomId"];
   [identifier setObject:LEAVE forKey:@"operation"];
@@ -111,21 +111,21 @@
 
 - (void)startListeningForMessagesInRoom:(NSInteger)roomId
 {
-  NSLog(@"startListeningForMessagesInRoom:%d", roomId);
-  NSString *path = [NSString stringWithFormat:@"/room/%d/live.json", roomId];
+  NSLog(@"startListeningForMessagesInRoom:%ld", (long)roomId);
+  NSString *path = [NSString stringWithFormat:@"/room/%ld/live.json", (long)roomId];
   [self startRequestWithMethod:@"GET" path:path streaming:YES key:path userInfo:LISTEN];
 }
 
 - (void)stopListeningForMessagesInRoom:(NSInteger)roomId
 {
-  NSString *path = [NSString stringWithFormat:@"/room/%d/live.json", roomId];
+  NSString *path = [NSString stringWithFormat:@"/room/%ld/live.json", (long)roomId];
   MSHTTPConnection *connection = [connections objectForKey:path];
   [connection disconnect];
   [connections removeObjectForKey:path];
 }
 
 - (void)sendTextMessage:(NSString *)message toRoom:(NSInteger)roomId {
-  NSString *path = [NSString stringWithFormat:@"/room/%d/speak.json", roomId];
+  NSString *path = [NSString stringWithFormat:@"/room/%ld/speak.json", (long)roomId];
   
   NSMutableDictionary *messageDict = [NSMutableDictionary dictionaryWithCapacity:2];
   [messageDict setObject:message forKey:@"body"];

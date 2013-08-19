@@ -7,12 +7,13 @@
 //
 
 #import <Adium/AIAccount.h>
+
 #import "MSCampfireEngine.h"
 
 @interface MSCampfireAccount : AIAccount {
   MSCampfireEngine *engine;
   NSMutableDictionary *_rooms;
-  NSData *lastRoomsUpdate;
+  NSDate *lastRoomsUpdate;
   NSInteger updatedRoomsCount;
   NSInteger authenticatedUserId;
 }
